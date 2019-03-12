@@ -6,11 +6,44 @@
     <title>Social Star</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
+    <!-- Boostrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Optional Theme-->
+    <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--JS minified-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+    <!--Master css-->
+    <link rel="stylesheet" href="{% static 'simplesocial/css/master.css' %}" >
+
 </head>
 <body>
-    {% block content %}
+    <nav class="navbar mynav" role="navigation" id="navbar" >
+        <div class="container">
+            <a class="navbar-brand mynav" href="{% url 'home' %}">Social Star</a>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a href="#">Post</a></li>
+                    <li><a href="#">Groups</a></li>
+                    <li><a href="#">Create Group</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
+                {% else %}
+                    <li><a href="#">Groups</a></li>
+                    <li><a href="{% url 'accounts:login' %}">Log In</a></li>
+                    <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+                {% endif %}
+
+            </ul>    
+        </div>
+    </nav>
+
+    <div class="container mycontent">
+        {% block content %}
     
-    {% endblock %}
+        {% endblock %}
+    </div>
+   
 </body>
 </html>
