@@ -5,7 +5,7 @@ from django.shortcuts import render
 from djang.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.core.urlresolvers import reverse
 from django.views import generic
-from groups.model import Group,GroupMember
+from groups.models import Group,GroupMember
 # Create your views here.
 
 class CreateGroup(LoginRequiredMixin,generic.CreateView):
@@ -17,7 +17,7 @@ class SingleGroup(generic.DetailView):
 
 class ListGroups(generic.ListView):
     model = Group
-    
+
 
 
 
