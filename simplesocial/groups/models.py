@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 import misaka
 
 from django.contrib.auth import get_user_model
@@ -11,7 +12,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 from django import template
-register = template.library()
+register = template.library
 
 class Group(models.Model):
     name =  models.CharField(max_length=255,unique=True)
@@ -36,8 +37,8 @@ class Group(models.Model):
             
     
 class GroupMember(models.Model):
-    group = models.ForeignKey(Group,related_name='memberships')
-    user = models.ForeignKey(User, realted_name_name='user_groups')
+    group = models.ForeignKey(Group,related_name='memberships',default='',on_delete=models.SET_DEFAULT)
+    user = models.ForeignKey(User, related_name='user_groups',default='',on_delete=models.SET_DEFAULT)
 
     def __str__(self):
         return self.user.username

@@ -4,17 +4,18 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.contrib import messages
 
-from djang.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from groups.models import Group,GroupMember
+from . import models
 # Create your views here.
 
 class CreateGroup(LoginRequiredMixin,generic.CreateView):
     fields = ('name','description')
-    models = Group
+    model = Group
 
 class SingleGroup(generic.DetailView):
     model = Group
